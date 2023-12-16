@@ -1,23 +1,10 @@
-#include "SPI.h" // Comment out this line if using Trinket or Gemma
-#ifdef __AVR_ATtiny85__
- #include <avr/power.h>
-#endif
-
 #include <FastLED.h>
-#include <AStar32U4.h>
 
 #include "data.h"
-#include "music.h"
-
-// These objects provide access to the A-Star's on-board
-// buttons.  We will only use buttonA.
-AStar32U4ButtonA buttonA;
-AStar32U4ButtonB buttonB;
-AStar32U4ButtonC buttonC;
 
 // WS2801 setup
-#define DATA_PIN 2   // Yellow wire / SCD
-#define CLOCK_PIN 3  // Green wire / SCL
+#define DATA_PIN 4   // Yellow wire / SCD // D2
+#define CLOCK_PIN 5  // Green wire / SCL  // D1
 
 #define NUM_LEDS 50
 
