@@ -1,11 +1,11 @@
-#include "SPI.h"
+#define FASTLED_ESP8266_RAW_PIN_ORDER
 #include <FastLED.h>
 
 #include "data.h"
 
 // WS2801 setup
-#define DATA_PIN 4   // Yellow wire / SDA
-#define CLOCK_PIN 5  // Green wire / SCL
+#define CLOCK_PIN D1  // Green wire / SCL
+#define DATA_PIN  D2  // Yellow wire / SDA
 
 #define NUM_LEDS 50
 
