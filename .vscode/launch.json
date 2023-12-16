@@ -23,9 +23,9 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",
-            "executable": "/home/cristian/Desktop/Workspace/arduino/xmas-lights/.pio/build/a-star32U4/firmware.elf",
-            "projectEnvName": "a-star32U4",
-            "toolchainBinDir": "/home/cristian/.platformio/packages/toolchain-atmelavr/bin",
+            "executable": "/home/cristian/Desktop/Workspace/xmas-lights/.pio/build/esp8266/firmware.elf",
+            "projectEnvName": "esp8266",
+            "toolchainBinDir": "/home/cristian/.platformio/packages/toolchain-xtensa/bin",
             "internalConsoleOptions": "openOnSessionStart",
             "preLaunchTask": {
                 "type": "PlatformIO",
@@ -36,18 +36,18 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (skip Pre-Debug)",
-            "executable": "/home/cristian/Desktop/Workspace/arduino/xmas-lights/.pio/build/a-star32U4/firmware.elf",
-            "projectEnvName": "a-star32U4",
-            "toolchainBinDir": "/home/cristian/.platformio/packages/toolchain-atmelavr/bin",
+            "executable": "/home/cristian/Desktop/Workspace/xmas-lights/.pio/build/esp8266/firmware.elf",
+            "projectEnvName": "esp8266",
+            "toolchainBinDir": "/home/cristian/.platformio/packages/toolchain-xtensa/bin",
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (without uploading)",
-            "executable": "/home/cristian/Desktop/Workspace/arduino/xmas-lights/.pio/build/a-star32U4/firmware.elf",
-            "projectEnvName": "a-star32U4",
-            "toolchainBinDir": "/home/cristian/.platformio/packages/toolchain-atmelavr/bin",
+            "executable": "/home/cristian/Desktop/Workspace/xmas-lights/.pio/build/esp8266/firmware.elf",
+            "projectEnvName": "esp8266",
+            "toolchainBinDir": "/home/cristian/.platformio/packages/toolchain-xtensa/bin",
             "internalConsoleOptions": "openOnSessionStart",
             "loadMode": "manual"
         }
