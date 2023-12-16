@@ -1,10 +1,11 @@
+#include "SPI.h"
 #include <FastLED.h>
 
 #include "data.h"
 
 // WS2801 setup
-#define DATA_PIN 4   // Yellow wire / SCD // D2
-#define CLOCK_PIN 5  // Green wire / SCL  // D1
+#define DATA_PIN 4   // Yellow wire / SDA
+#define CLOCK_PIN 5  // Green wire / SCL
 
 #define NUM_LEDS 50
 
