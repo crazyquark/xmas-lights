@@ -14,36 +14,35 @@
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
 
-const char* PARAM_INPUT_1 = "output";
-const char* PARAM_INPUT_2 = "state";
+static bool pwr = true;
 
-String indexFile = "";
+String outputState(int output) {
+  switch (output) {
+  case 1:
+    return pwr ? "checked" : "";
+  default:
+    break;
+  }
 
-String outputState(int output){
-  if(digitalRead(output)){
-    return "checked";
-  }
-  else {
-    return "";
-  }
+  return String();
 }
 
 // Replaces placeholder with button section in your web page
-String processor(const String& var){
-  //Serial.println(var);
-  if(var == "BUTTONPLACEHOLDER"){
+String processor(const String &var) {
+  // Serial.println(var);
+  if (var == "BUTTONPLACEHOLDER") {
     String buttons = "";
-    buttons += "<h4>Output - GPIO 5</h4><label class=\"switch\"><input type=\"checkbox\" onchange=\"toggleCheckbox(this)\" id=\"5\" " + outputState(5) + "><span class=\"slider\"></span></label>";
-    buttons += "<h4>Output - GPIO 4</h4><label class=\"switch\"><input type=\"checkbox\" onchange=\"toggleCheckbox(this)\" id=\"4\" " + outputState(4) + "><span class=\"slider\"></span></label>";
-    buttons += "<h4>Output - GPIO 2</h4><label class=\"switch\"><input type=\"checkbox\" onchange=\"toggleCheckbox(this)\" id=\"2\" " + outputState(2) + "><span class=\"slider\"></span></label>";
+    buttons += "<h4>Power</h4><label class=\"switch\"><input "
+               "type=\"checkbox\" onchange=\"toggleCheckbox(this)\" id=\"1\" " +
+               outputState(1) + "><span class=\"slider\"></span></label>";
     return buttons;
   }
   return String();
 }
 
 // WS2801 setup
-#define CLOCK_PIN D1  // Green wire / SCL
-#define DATA_PIN  D2  // Yellow wire / SDA
+#define CLOCK_PIN D1 // Green wire / SCL
+#define DATA_PIN D2  // Yellow wire / SDA
 
 #define NUM_LEDS 50
 
@@ -71,16 +70,33 @@ void setup() {
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
 
-    // Launch SPIFFS file system
-  if (!SPIFFS.begin())
-  {
+  // Launch SPIFFS file system
+  if (!SPIFFS.begin()) {
     Serial.println("An Error has occurred while mounting SPIFFS");
     return;
   }
 
   // Route for root / web page
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(SPIFFS, "/index.html", String(), false, processor);
+  });
+
+  server.on("/update", HTTP_GET, [](AsyncWebServerRequest *request) {
+    if (request->hasParam("output")) {
+      const auto output = request->getParam("output")->value().toInt();
+      const auto state = request->getParam("state")->value().toInt();
+
+      switch (output)
+      {
+      case 1:
+        pwr = state == 1;
+        Serial.println("Power" + pwr ? "on" : "off");
+        break;
+
+      default:
+        break;
+      }
+    }
   });
 
   // Start server
@@ -117,8 +133,10 @@ void colorTurnOn(uint32_t color) {
 }
 
 void loop() {
-  colorTurnOn(CRGB::Red);
-  colorTurnOn(CRGB::Blue);
-  colorTurnOn(CRGB::Green);
-  colorTurnOn(CRGB::HotPink);
+  if (pwr) {
+    colorTurnOn(CRGB::Red);
+    colorTurnOn(CRGB::Blue);
+    colorTurnOn(CRGB::Green);
+    colorTurnOn(CRGB::HotPink);
+  }
 }
