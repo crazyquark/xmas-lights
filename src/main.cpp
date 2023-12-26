@@ -14,7 +14,7 @@
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
 
-static bool pwr = true;
+bool pwr = true;
 
 String outputState(int output) {
   switch (output) {
@@ -89,8 +89,9 @@ void setup() {
       switch (output)
       {
       case 1:
-        pwr = state == 1;
-        Serial.println("Power" + pwr ? "on" : "off");
+      Serial.println(state);
+        pwr = (state == 1);
+        Serial.println(pwr ? "on" : "off");
         break;
 
       default:
@@ -104,6 +105,8 @@ void setup() {
 }
 
 void lights(CRGB color, uint8_t intensity) {
+  pwr = true;
+
   for (size_t i = 0; i < NUM_LEDS; i++) {
     leds[i] = color;
 
